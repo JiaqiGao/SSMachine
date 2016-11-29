@@ -33,11 +33,14 @@ def auth():
         combine += x[0] + ":" + x[1]
         combine += ";"
 
-    f = open('wishes.csv', 'w')
+    f = open('static/wishes.csv', 'w')
     f.write(combine)
     f.close()
- 
-    return render_template("result.html", result=result)
+
+    nresult = result[0]
+    wresult = result[1] 
+
+    return render_template("result.html", nresult=nresult, wresult=wresult)
 
 @app.route("/add", methods=['POST'])
 def add():
@@ -48,7 +51,7 @@ def create():
     name = request.form["username"]
     wishes = request.form["wishlist"]
     fields = name + ":" + wishes
-    fd = open('wishes.csv','a')
+    fd = open('static/wishes.csv','a')
     fd.write(fields+';')
     fd.close()
     
